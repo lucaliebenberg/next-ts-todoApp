@@ -9,9 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/core": "^11.0.0",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@faker-js/faker": "^7.6.0",
+    "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.1",
     "@next/font": "13.1.0",
     "@types/node": "18.11.17",
