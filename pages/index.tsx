@@ -99,7 +99,7 @@ export const Home: NextPage<props> = () => {
               <StyledALert severity='warning' icon={<Warning />}>No value added</StyledALert>
 
               <ButtonFlex>
-                <Button variant="outlined">Cancel</Button>
+                <Button onClick={handleToResting} variant="outlined">Cancel</Button>
                 <Button variant="contained">Add</Button>
               </ButtonFlex>
             </InnerDialog>
