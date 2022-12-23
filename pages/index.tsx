@@ -1,7 +1,7 @@
 
 import { useState} from 'react';
-import { Paper, Typography, Checkbox, IconButton, Button } from '@mui/material'  ;
-import { Delete } from '@mui/icons-material';
+import { Paper, Typography, Checkbox, IconButton, Button, Dialog, TextField, Alert } from '@mui/material'  ;
+import { Delete, Warning } from '@mui/icons-material';
 import styled from '@emotion/styled';
 import { Global } from '@emotion/react';
 import {faker} from '@faker-js/faker'
@@ -20,6 +20,28 @@ const Card = styled(Paper)`
   align-items: center;
 `
 
+const Wrapper = styled.div`
+  background: #EEE;
+  min-height: 100vh;
+  padding: 1rem;
+`
+const InnerDialog = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+`
+
+const ButtonFlex = styled.div`
+  display: flex;
+  flex-drection: row;
+  justify-content: space-between;
+  margin-top: 1rem;
+`
+
+const StyledALert = styled(Alert)`
+  margin-top: 1rem;
+`
+
 type task = {
   id: string, 
   title: string,
@@ -29,6 +51,8 @@ type task = {
 type props = {
   tasks: task[],
 }
+
+type phase = 'resting' | 'adding'
 
 // export const getStaticProps: GetStaticProps<props> = () => {
 //   const TASKS = faker.datatype.array(100).map(() => ({
@@ -44,18 +68,47 @@ type props = {
 //   }
 // }
 
-const useTasks = () => {
+// const useTasks = () => {
 
-}
+// }
 
 
 export const Home: NextPage<props> = () => {
+  const [phase, setPhase] =  useState<phase>()
   const [tasks, setTasks] = useState<task[]>([])
+  const [alert, setAlert] = useState<null | string>(null);
+
+  const handleToResting = () => {
+    setPhase('resting')
+  }
+  
+  const handleToAdding = () => {
+    setPhase('adding')
+  }
+
 
   if (tasks.length < 1) {
     return (
-      <Typography>There are no tasks. Please add one.</Typography>
-    )
+      <Wrapper>
+        {phase === 'adding' && (
+          <Dialog onClose={handleToResting} open>
+            <InnerDialog>
+              <TextField label="Name" />
+
+
+              <StyledALert severity='warning' icon={<Warning />}>No value added</StyledALert>
+
+              <ButtonFlex>
+                <Button variant="outlined">Cancel</Button>
+                <Button variant="contained">Add</Button>
+              </ButtonFlex>
+            </InnerDialog>
+          </Dialog>
+      )} 
+        <Typography>There are no tasks. Please add one.</Typography>
+        <Button variant='contained' onClick={handleToAdding}>Add Task</Button>
+      </Wrapper>
+    );
   }
 
   return (

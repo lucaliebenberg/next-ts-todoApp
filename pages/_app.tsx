@@ -6,7 +6,7 @@ export const App = ({ Component, pageProps }: AppProps) => {
   return (
   <>
   <Head>
-    <title>Create Next App</title>
+    <title>My Todo App</title>
     <link rel="icon" href="/favicon.ico" />
    
   </Head>
