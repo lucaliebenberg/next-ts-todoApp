@@ -11,6 +11,7 @@ export const App = ({ Component, pageProps }: AppProps) => {
    
   </Head>
 
+  {/* Universal component in app file from Material UI for baseline styling */}
   <CssBaseline />
   <Component {...pageProps} />
   </>
